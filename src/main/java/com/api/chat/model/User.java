@@ -2,8 +2,7 @@ package com.api.chat.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
+
 public class User {
     @Id
     @Column
@@ -15,5 +14,4 @@ public class User {
     private String password;
     @Column
     private String email;
-
 }
