@@ -11,11 +11,14 @@ import java.util.List;
 @RequestMapping(path = "/")
 public class ChannelController {
     private ChannelService channelService;
-
+    //Connecting service to controller
     @Autowired
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;
     }
 
-
+    @GetMapping(path = "/channel/")
+    public List<Channel> getChannels() {
+        return channelService.getChannels();
+    }
 }
