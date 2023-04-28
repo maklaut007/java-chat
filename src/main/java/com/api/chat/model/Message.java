@@ -17,9 +17,6 @@ public class Message {
     @Column
     private String text;
 
-    @Column
-    private String channel_id;
-
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channel channel;
@@ -27,10 +24,9 @@ public class Message {
     public Message() {
 
     }
-    public Message(Long id, String text, String channel_id, Channel channel) {
+    public Message(Long id, String text, Channel channel) {
         this.id = id;
         this.text = text;
-        this.channel_id = channel_id;
         this.channel = channel;
     }
 
@@ -50,14 +46,6 @@ public class Message {
         this.text = text;
     }
 
-    public String getChannel_id() {
-        return channel_id;
-    }
-
-    public void setChannel_id(String channel_id) {
-        this.channel_id = channel_id;
-    }
-
     public Channel getChannel() {
         return channel;
     }
@@ -72,7 +60,6 @@ public class Message {
         return "Message{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", channel_id='" + channel_id + '\'' +
                 ", channel=" + channel +
                 '}';
     }

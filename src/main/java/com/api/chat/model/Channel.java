@@ -16,17 +16,16 @@ public class Channel {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Message> messagesList;
 
     public Channel() {
     }
 
-    public Channel(Long id, String name, List<Message> messagesList) {
+    public Channel(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.messagesList = messagesList;
     }
 
 
