@@ -11,8 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/channels")
 public class ChannelController {
-    private ChannelService channelService;
+
     //Connecting service to controller
+    private ChannelService channelService;
     @Autowired
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;

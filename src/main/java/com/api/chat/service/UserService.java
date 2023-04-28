@@ -1,6 +1,5 @@
 package com.api.chat.service;
 
-import com.api.chat.model.Channel;
 import com.api.chat.model.User;
 import com.api.chat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
