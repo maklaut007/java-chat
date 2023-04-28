@@ -2,6 +2,7 @@ package com.api.chat.controller;
 
 import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
+import com.api.chat.model.UserChannel;
 import com.api.chat.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,11 @@ public class ChannelController {
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;
     }
+
+    @Autowired
+    private UserChannel userChannel;
+
+
 
     @GetMapping(path = "/")
     public List<Channel> getChannels() {
@@ -42,5 +48,8 @@ public class ChannelController {
     public List<Channel> findUserChannels(@PathVariable Long userId) {
         return channelService.findUserChannels(userId);
     }
-
+    @PostMapping(path = "/channels/users/{userId}")
+    public UserChannel addUserToChannel(@PathVariable Long userId) {
+        return .findUserChannels(userId);
+    }
 }
