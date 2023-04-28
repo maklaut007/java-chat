@@ -51,10 +51,6 @@ public class Channel {
         this.name = name;
     }
 
-    public List<Message> getMessageList() {
-        return messagesList;
-    }
-
     public void setMessagesList(List<Message> messagesList) {
         this.messagesList = messagesList;
     }
