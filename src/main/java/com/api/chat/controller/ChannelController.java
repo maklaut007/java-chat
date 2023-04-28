@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/channel")
 public class ChannelController {
     private ChannelService channelService;
     //Connecting service to controller
@@ -18,12 +18,12 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
-    @GetMapping(path = "/channel")
+    @GetMapping(path = "/")
     public List<Channel> getChannels() {
         return channelService.getChannels();
     }
 
-    @GetMapping(path = "/channel/{channelId}")
+    @GetMapping(path = "/{channelId}")
     public Channel getChannelById(@PathVariable Long channelId) {
         Channel channel = channelService.getChannelById(channelId);
         if(channel == null){
@@ -32,7 +32,7 @@ public class ChannelController {
         return channelService.getChannelById(channelId);
     }
 
-    @PostMapping(path = "/channel")
+    @PostMapping(path = "/")
     public Channel createChannel(@RequestBody Channel channel) {
         return channelService.createChannel(channel);
     }
