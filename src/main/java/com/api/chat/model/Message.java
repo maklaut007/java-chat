@@ -1,11 +1,8 @@
 package com.api.chat.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "messages")
@@ -17,10 +14,16 @@ public class Message {
 
     @Column
     private String text;
+    // Connecting Channel
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channel channel;
+
+    // Connecting User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Channel user;
 
     public Message() {
 
@@ -55,6 +58,13 @@ public class Message {
         this.channel = channel;
     }
 
+    public Channel getUser() {
+        return user;
+    }
+
+    public void setUser(Channel user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
@@ -62,6 +72,9 @@ public class Message {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", channel=" + channel +
+                ", user=" + user +
                 '}';
     }
+
+
 }

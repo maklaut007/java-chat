@@ -27,6 +27,11 @@ public class User {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserChannel> userChannelList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Message> messageList;
+
     public User() {
     }
 
@@ -75,6 +80,14 @@ public class User {
 
     public void setUserChannelList(List<UserChannel> userChannelList) {
         this.userChannelList = userChannelList;
+    }
+
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
     }
 
     @Override
