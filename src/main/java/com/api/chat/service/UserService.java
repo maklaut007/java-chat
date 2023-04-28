@@ -20,6 +20,7 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
     public User getUserById(Long user) {
         return userRepository.findById(user).get();
     }
@@ -27,4 +28,9 @@ public class UserService {
     public User createUser(User user) { // !!! check if already exists
         return userRepository.save(user);
     }
+
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
 }
