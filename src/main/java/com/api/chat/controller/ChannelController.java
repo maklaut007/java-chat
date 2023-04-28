@@ -2,8 +2,11 @@ package com.api.chat.controller;
 
 import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
+import com.api.chat.model.User;
 import com.api.chat.model.UserChannel;
 import com.api.chat.service.ChannelService;
+import com.api.chat.service.UserChannelService;
+import com.api.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +23,11 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
+    private UserChannelService userChannelService;
     @Autowired
-    private UserChannel userChannel;
-
-
+    public void setUserChannelService(UserChannelService userChannelService) {
+        this.userChannelService = userChannelService;
+    }
 
     @GetMapping(path = "/")
     public List<Channel> getChannels() {
@@ -44,12 +48,12 @@ public class ChannelController {
         return channelService.createChannel(channel);
     }
 
-    @GetMapping(path = "/channels/users/{userId}")
+    @GetMapping(path = "/users/{userId}")
     public List<Channel> findUserChannels(@PathVariable Long userId) {
         return channelService.findUserChannels(userId);
     }
-    @PostMapping(path = "/channels/users/{userId}")
-    public UserChannel addUserToChannel(@PathVariable Long userId) {
-        return .findUserChannels(userId);
+    @PostMapping(path = "/{channelId}/user/{userId}")
+    public UserChannel addUserToChannel(@PathVariable Long channelId, @PathVariable Long userId) {
+        return userChannelService.addUserToChannel(channelId, userId);
     }
 }

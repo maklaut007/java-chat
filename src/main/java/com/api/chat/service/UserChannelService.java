@@ -21,6 +21,7 @@ public class UserChannelService {
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;
     }
+
     UserService userService;
     @Autowired
     public void setUserService(UserService userService) {
