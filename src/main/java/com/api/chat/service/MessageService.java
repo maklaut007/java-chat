@@ -23,7 +23,7 @@ public class MessageService {
      * @return all messages
      */
     public List<Message> getMessages(Long channelId) {
-        return messageRepository.findAll();
+        return messageRepository.findMessageByChannelId(channelId);
     }
     // Get message from category by Id
     // Delete message from category by Id
