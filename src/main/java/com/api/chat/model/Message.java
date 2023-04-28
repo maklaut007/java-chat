@@ -3,7 +3,7 @@ package com.api.chat.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "message")
+@Table(name = "messages")
 public class Message {
     @Id
     @Column

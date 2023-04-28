@@ -14,4 +14,6 @@ public class MessageController {
     public void setMessageService(MessageService messageService) {
         this.messageService = messageService;
     }
+
+
 }
