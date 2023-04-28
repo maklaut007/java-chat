@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/channel")
+@RequestMapping(path = "/channels")
 public class ChannelController {
     private ChannelService channelService;
     //Connecting service to controller

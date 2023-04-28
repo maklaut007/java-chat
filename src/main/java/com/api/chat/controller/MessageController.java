@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/channel")
+@RequestMapping(path = "/channels")
 public class MessageController {
     private MessageService messageService;
 
@@ -18,12 +18,12 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @GetMapping(path = "/{channelId}/message")
+    @GetMapping(path = "/{channelId}/messages/")
     public List<Message> getMessages(@PathVariable Long channelId) {
         return messageService.getMessages(channelId);
     }
 
-    @PostMapping(path = "/{channelId}/message")
+    @PostMapping(path = "/{channelId}/messages/")
     public Message createMessage(@PathVariable Long channelId, @RequestBody Message message) {
         return messageService.createMessage(channelId, message);
     }
