@@ -17,16 +17,33 @@ public class ChannelService {
         this.channelRepository = channelRepository;
     }
 
+    /**
+     * Returns list of channels
+     * @return all channels
+     */
     public List<Channel> getChannels() {
         return channelRepository.findAll();
     }
 
+    /**
+     * @param channelId
+     * @return channel with id channelId
+     */
     public Channel getChannelById(@PathVariable Long channelId) {
         return channelRepository.findChannelById(channelId);
     }
 
-//    public Channel createChannel(Channel channelObject) {
-//        return channelRepository.save(channelObject);
-//    }
+    /**
+     * Adds provided channel to the list of channels
+     * @param channelObject
+     * @return
+     */
+    public Channel createChannel(Channel channelObject) {
+        return channelRepository.save(channelObject);
+    }
+
+    // Update channel name
+    // Remove channel
+
 }
 
