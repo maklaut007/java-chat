@@ -19,9 +19,10 @@ public class MessageService {
     // Get all messages from category
     /**
      * Returns list of messages
+     * @param channelId id of channel that contains messages
      * @return all messages
      */
-    public List<Message> getChannels() {
+    public List<Message> getMessages(Long channelId) {
         return messageRepository.findAll();
     }
     // Get message from category by Id
