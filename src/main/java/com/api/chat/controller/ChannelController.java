@@ -1,5 +1,6 @@
 package com.api.chat.controller;
 
+import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
 import com.api.chat.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class ChannelController {
 
     @GetMapping(path = "/channel/{channelId}")
     public Channel getChannelById(@PathVariable Long channelId) {
+        Channel channel = channelService.getChannelById(channelId);
+        if(channel == null){
+            throw new InformationNotFoundException("no channel with id "+ channelId + " not found");
+        }
         return channelService.getChannelById(channelId);
     }
 
