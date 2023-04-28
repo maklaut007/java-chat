@@ -17,8 +17,14 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
-    @GetMapping(path = "/channel/")
+    @GetMapping(path = "/channel")
     public List<Channel> getChannels() {
         return channelService.getChannels();
     }
+
+    @PostMapping(path = "/channel")
+    public Channel createChannel(@RequestBody Channel channel) {
+        return channelService.createChannel(channel);
+    }
+
 }

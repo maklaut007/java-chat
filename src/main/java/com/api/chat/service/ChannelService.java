@@ -19,4 +19,8 @@ public class ChannelService {
     public List<Channel> getChannels() {
         return channelRepository.findAll();
     }
+    public Channel createChannel(Channel channelObject) {
+        return channelRepository.save(channelObject);
+    }
 }
+
