@@ -13,6 +13,7 @@ public class MessageService {
 
     // Connect repository to service
     private MessageRepository messageRepository;
+
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
@@ -20,6 +21,7 @@ public class MessageService {
 
     // Add access to channel service
     private ChannelService channelService;
+
     @Autowired
     public void setChannelService(ChannelService channelService) {
         this.channelService = channelService;
@@ -27,6 +29,7 @@ public class MessageService {
 
     /**
      * Returns list of messages in channel
+     *
      * @param channelId id of channel that contains messages
      * @return all messages
      */
@@ -41,10 +44,12 @@ public class MessageService {
      */
     public Message createMessage(Long channelId, Message message) {
         Channel channel = channelService.getChannelById(channelId);
-        if(channel != null){
+        if (channel != null) {
+            System.out.println(message);
             message.setChannel(channel);
             return messageRepository.save(message);
         } else {
+            System.out.println("Error in create message");
             // throw error
         }
         return messageRepository.save(message); // delete later
