@@ -42,6 +42,9 @@ public class ChannelService {
         return channelRepository.save(channelObject);
     }
 
+    public List<Channel> findUserChannels(Long userId){
+        return channelRepository.findChannelsByUserId(userId);
+    }
     // Update channel name
     // Remove channel
 
