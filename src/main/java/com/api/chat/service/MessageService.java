@@ -1,5 +1,6 @@
 package com.api.chat.service;
 
+import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
 import com.api.chat.model.Message;
 import com.api.chat.repository.MessageRepository;
@@ -29,7 +30,6 @@ public class MessageService {
 
     /**
      * Returns list of messages in channel
-     *
      * @param channelId id of channel that contains messages
      * @return all messages
      */
@@ -40,19 +40,19 @@ public class MessageService {
     /**
      * Adds new message to channel
      * @param channelId id of channel that contains messages
+     * @param messageObject object of message from user
      * @return message object
      */
-    public Message createMessage(Long channelId, Message message) {
+
+    public Message createMessage(Long channelId, Message messageObject) {
         Channel channel = channelService.getChannelById(channelId);
         if (channel != null) {
-            System.out.println(message);
-            message.setChannel(channel);
-            return messageRepository.save(message);
+            System.out.println(messageObject);
+            messageObject.setChannel(channel);
+            return messageRepository.save(messageObject);
         } else {
-            System.out.println("Error in create message");
-            // throw error
+            throw new InformationNotFoundException("Channel with id " + channelId + " not found");
         }
-        return messageRepository.save(message); // delete later
     }
     // Get message from category by Id
     // Delete message from category by Id
