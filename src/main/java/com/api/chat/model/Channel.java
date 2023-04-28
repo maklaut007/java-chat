@@ -1,5 +1,6 @@
 package com.api.chat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -19,6 +20,11 @@ public class Channel {
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Message> messagesList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "channel", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserChannel> userChannelList;
 
     public Channel() {
     }
@@ -53,6 +59,17 @@ public class Channel {
         this.messagesList = messagesList;
     }
 
+    public List<Message> getMessagesList() {
+        return messagesList;
+    }
+
+    public List<UserChannel> getUserChannelList() {
+        return userChannelList;
+    }
+
+    public void setUserChannelList(List<UserChannel> userChannelList) {
+        this.userChannelList = userChannelList;
+    }
 
     @Override
     public String toString() {

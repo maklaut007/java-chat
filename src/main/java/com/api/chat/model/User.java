@@ -1,6 +1,11 @@
 package com.api.chat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +21,11 @@ public class User {
     private String password;
     @Column
     private String email;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserChannel> userChannelList;
 
     public User() {
     }
@@ -59,6 +69,14 @@ public class User {
         this.email = email;
     }
 
+    public List<UserChannel> getUserChannelList() {
+        return userChannelList;
+    }
+
+    public void setUserChannelList(List<UserChannel> userChannelList) {
+        this.userChannelList = userChannelList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -68,4 +86,6 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 }
