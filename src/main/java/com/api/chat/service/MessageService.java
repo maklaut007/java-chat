@@ -30,29 +30,30 @@ public class MessageService {
 
     /**
      * Returns list of messages in channel
+     *
      * @param channelId id of channel that contains messages
      * @return all messages
      */
     public List<Message> getMessages(Long channelId) {
+        if (channelService.getChannelById(channelId) == null)
+            throw new InformationNotFoundException("Channel with id " + channelId + " not found");
         return messageRepository.findMessageByChannelId(channelId);
     }
 
     /**
      * Adds new message to channel
-     * @param channelId id of channel that contains messages
+     *
+     * @param channelId     id of channel that contains messages
      * @param messageObject object of message from user
      * @return message object
      */
 
     public Message createMessage(Long channelId, Message messageObject) {
         Channel channel = channelService.getChannelById(channelId);
-        if (channel != null) {
-            System.out.println(messageObject);
-            messageObject.setChannel(channel);
-            return messageRepository.save(messageObject);
-        } else {
+        if (channel == null)
             throw new InformationNotFoundException("Channel with id " + channelId + " not found");
-        }
+        messageObject.setChannel(channel);
+        return messageRepository.save(messageObject);
     }
     // Get message from category by Id
     // Delete message from category by Id
