@@ -4,10 +4,7 @@ package com.api.chat.controller;
 import com.api.chat.model.User;
 import com.api.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping(path = "/")
+    @PostMapping(path = "/")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
