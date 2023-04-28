@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/users")
+@RequestMapping(path = "/users/")
 class UserController {
     private UserService userService;
     @Autowired
@@ -21,7 +21,7 @@ class UserController {
         return userService.getUsers();
     }
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "/register/")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
