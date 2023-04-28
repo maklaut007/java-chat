@@ -12,4 +12,8 @@ public class MessageService {
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
+    // Get all messages from category
+    // Get message from category by Id
+    // Delete message from category by Id
+    // Edit message
 }

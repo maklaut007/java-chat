@@ -26,7 +26,7 @@ public class ChannelService {
     }
 
     /**
-     * @param channelId
+     * @param channelId id of channel we are looking for
      * @return channel with id channelId
      */
     public Channel getChannelById(@PathVariable Long channelId) {
@@ -35,8 +35,8 @@ public class ChannelService {
 
     /**
      * Adds provided channel to the list of channels
-     * @param channelObject
-     * @return
+     * @param channelObject body file from request
+     * @return created channel
      */
     public Channel createChannel(Channel channelObject) {
         return channelRepository.save(channelObject);
