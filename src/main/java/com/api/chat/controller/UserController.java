@@ -19,5 +19,9 @@ class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+    @GetMapping(path = "/")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
 
 }
