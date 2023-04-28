@@ -22,9 +22,14 @@ public class ChannelController {
         return channelService.getChannels();
     }
 
-    @PostMapping(path = "/channel")
-    public Channel createChannel(@RequestBody Channel channel) {
-        return channelService.createChannel(channel);
+    @GetMapping(path = "/channel/{channelId}")
+    public Channel getChannelById(@PathVariable Long channelId) {
+        return channelService.getChannelById(channelId);
     }
+
+//    @PostMapping(path = "/channel")
+//    public Channel createChannel(@RequestBody Channel channel) {
+//        return channelService.createChannel(channel);
+//    }
 
 }
