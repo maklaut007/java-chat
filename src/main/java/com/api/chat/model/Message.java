@@ -1,5 +1,6 @@
 package com.api.chat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -16,7 +17,7 @@ public class Message {
 
     @Column
     private String text;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channel channel;
