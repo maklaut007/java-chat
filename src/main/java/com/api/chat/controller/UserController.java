@@ -24,4 +24,8 @@ class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping(path = "/")
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
 }
