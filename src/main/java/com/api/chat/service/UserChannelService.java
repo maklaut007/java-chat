@@ -35,11 +35,21 @@ public class UserChannelService {
      * @return created UserChannel object
      */
     public UserChannel addUserToChannel(Long channelId, Long userId){
+        // !!! Check if user-channel already exists
         // Getting channel object
         Channel channel = channelService.getChannelById(channelId);
         User user = userService.getUserById(userId);
         //Creating object to add into repository
         UserChannel userChannel = new UserChannel(user, channel);
         return userChannelRepository.save(userChannel);
+    }
+    /**
+     * Add selected channel to user with id provided in Url
+     * @param userId id of a user that we are adding to a channel
+     * @param channelId id of a channel where we add user
+     * @return created UserChannel object
+     */
+    public UserChannel addChannelToUser(Long userId, Long channelId ){
+        return addUserToChannel(channelId, userId);
     }
 }
