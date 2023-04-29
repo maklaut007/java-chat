@@ -41,6 +41,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Gets user from the token
+     * @return current user
+     */
+    public static User getCurrentLoggedInUser(){
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUser();
+    }
+
     public List<User> getUsers() {
         return userRepository.findAll();
     }
