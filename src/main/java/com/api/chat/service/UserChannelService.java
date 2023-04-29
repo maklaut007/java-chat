@@ -16,40 +16,24 @@ public class UserChannelService {
         this.userChannelRepository = userChannelRepository;
     }
 
-    ChannelService channelService;
-    @Autowired
-    public void setChannelService(ChannelService channelService) {
-        this.channelService = channelService;
-    }
-
-    UserService userService;
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     /**
      * Add selected user to channel with id provided in Url
-     * @param channelId id of a channel where we add user
-     * @param userId id of a user that we are adding to a channel
+     * @param channel object of a channel where we add user
+     * @param user object a user that we are adding to a channel
      * @return created UserChannel object
      */
-    public UserChannel addUserToChannel(Long channelId, Long userId){
+    public UserChannel addUserToChannel(Channel channel, User user){
         // !!! Check if user-channel already exists
-        // Getting channel object
-        Channel channel = channelService.getChannelById(channelId);
-        User user = userService.getUserById(userId);
-        //Creating object to add into repository
         UserChannel userChannel = new UserChannel(user, channel);
         return userChannelRepository.save(userChannel);
     }
     /**
      * Add selected channel to user with id provided in Url
-     * @param userId id of a user that we are adding to a channel
-     * @param channelId id of a channel where we add user
+     * @param user object of a user that we are adding to a channel
+     * @param channel object id of a channel where we add user
      * @return created UserChannel object
      */
-    public UserChannel addChannelToUser(Long userId, Long channelId ){
-        return addUserToChannel(channelId, userId);
+    public UserChannel addChannelToUser(User user, Channel channel){
+        return addUserToChannel(channel, user);
     }
 }

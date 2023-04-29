@@ -1,7 +1,10 @@
 package com.api.chat.service;
 
 import com.api.chat.model.Channel;
+import com.api.chat.model.User;
+import com.api.chat.model.UserChannel;
 import com.api.chat.repository.ChannelRepository;
+import com.api.chat.repository.UserChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +20,14 @@ public class ChannelService {
         this.channelRepository = channelRepository;
     }
 
+    private UserChannelService userChannelService;
+    @Autowired
+    public void setUserChannelService(UserChannelService userChannelService) {
+        this.userChannelService = userChannelService;
+    }
+
     /**
-     * Returns list of channels
+     * Returns list of channels that are belong to current user
      * @return all channels
      */
     public List<Channel> getChannels() {
@@ -26,6 +35,7 @@ public class ChannelService {
     }
 
     /**
+     *
      * @param channelId id of channel we are looking for
      * @return channel with id channelId
      */
@@ -39,7 +49,9 @@ public class ChannelService {
      * @return created channel
      */
     public Channel createChannel(Channel channelObject) {
-        return channelRepository.save(channelObject);
+        Channel channel = channelRepository.save(channelObject);
+        userChannelService.addChannelToUser(UserService.getCurrentLoggedInUser(), channel);
+        return channel;
     }
 
     public List<Channel> findUserChannels(Long userId){
