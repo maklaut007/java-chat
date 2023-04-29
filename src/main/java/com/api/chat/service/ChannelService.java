@@ -22,7 +22,7 @@ public class ChannelService {
      * @return all channels
      */
     public List<Channel> getChannels() {
-        return channelRepository.findAll();
+        return channelRepository.findChannelsByUserId(UserService.getCurrentLoggedInUser().getId());
     }
 
     /**
