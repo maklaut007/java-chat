@@ -20,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-
     private MyUserDetailsService myUserDetailsService;
 
     @Autowired
@@ -32,6 +31,7 @@ public class SecurityConfiguration {
     public JwtRequestFilter authJwtRequestFilter(){
         return new JwtRequestFilter();
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,11 +39,12 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/users/register/", "/auth/users/login/").permitAll()
+        http.authorizeRequests().antMatchers("/users/register/", "/users/login/").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
+        http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     @Bean

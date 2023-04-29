@@ -1,9 +1,10 @@
 package com.api.chat.controller;
 
-
+import com.api.chat.model.request.LoginRequest;
 import com.api.chat.model.User;
 import com.api.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,4 +26,10 @@ class UserController {
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
+    @PostMapping("/login/")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        return userService.loginUser(loginRequest);
+    }
+
 }

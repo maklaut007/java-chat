@@ -1,5 +1,6 @@
 package com.api.chat.security;
 
+
 import com.api.chat.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
