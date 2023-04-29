@@ -53,8 +53,5 @@ public class ChannelController {
         return channelService.findUserChannels(userId);
     }
 
-    @PostMapping(path = "/{channelId}/user/{userId}")
-    public UserChannel addUserToChannel(@PathVariable Long channelId, @PathVariable Long userId) {
-        return userChannelService.addUserToChannel(channelId, userId);
-    }
+
 }
