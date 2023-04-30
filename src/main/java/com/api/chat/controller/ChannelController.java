@@ -34,12 +34,8 @@ public class ChannelController {
         return channelService.getChannels();
     }
 
-    @GetMapping(path = "/{channelId}")
+    @GetMapping(path = "/{channelId}/")
     public Channel getChannelById(@PathVariable Long channelId) {
-        Channel channel = channelService.getChannelById(channelId);
-        if(channel == null){
-            throw new InformationNotFoundException("no channel with id "+ channelId + " not found");
-        }
         return channelService.getChannelById(channelId);
     }
 

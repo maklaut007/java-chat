@@ -1,10 +1,8 @@
 package com.api.chat.service;
 
+import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
-import com.api.chat.model.User;
-import com.api.chat.model.UserChannel;
 import com.api.chat.repository.ChannelRepository;
-import com.api.chat.repository.UserChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +17,6 @@ public class ChannelService {
     public void setChannelRepository(ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
     }
-
     private UserChannelService userChannelService;
     @Autowired
     public void setUserChannelService(UserChannelService userChannelService) {
@@ -35,12 +32,15 @@ public class ChannelService {
     }
 
     /**
-     *
+     * Returns channel by id if user is in this channel
      * @param channelId id of channel we are looking for
      * @return channel with id channelId
      */
     public Channel getChannelById(@PathVariable Long channelId) {
-        return channelRepository.findChannelById(channelId);
+        Channel channel = channelRepository.findChannelByIdAndUserId(channelId, UserService.getCurrentLoggedInUser().getId());
+        if (channel == null)
+            throw new InformationNotFoundException("Channel with id " + channelId + " not found");
+        return channel;
     }
 
     /**
@@ -54,7 +54,8 @@ public class ChannelService {
         return channel;
     }
 
-    
+    // Add user to channel
+
     // Update channel name
     // Remove channel
 
