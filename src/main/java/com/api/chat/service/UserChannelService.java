@@ -16,18 +16,21 @@ import org.springframework.stereotype.Service;
 public class UserChannelService {
 
     UserChannelRepository userChannelRepository;
+
     @Autowired
     public void setUserChannelRepository(UserChannelRepository userChannelRepository) {
         this.userChannelRepository = userChannelRepository;
     }
 
     UserRepository userRepository;
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     ChannelRepository channelRepository;
+
     @Autowired
     public void setChannelRepository(ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
@@ -35,18 +38,31 @@ public class UserChannelService {
 
     /**
      * Add selected user to channel
+     *
      * @param channelId id of a channel where we add user
-     * @param userId id a user that we are adding to a channel
+     * @param userId    id a user that we are adding to a channel
      * @return created UserChannel object
      * @throws InformationExistException if user aredy exists in current channel
      */
-    public UserChannel addUserToChannel(Long channelId, Long userId){
-        UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(userId, channelId);
-        if(userChannel != null){
-            throw new InformationExistException("User with id " + userId + " is alredy exist in channel " + channelId);
+    public UserChannel addUserToChannel(Long channelId, Long userId) {
+
+        if (checkUserInChannel(userId, channelId)) {
+            throw new InformationExistException("User with id " + userId + " is already exist in channel " + channelId);
         }
-        userChannel = new UserChannel(userRepository.findUserById(userId),channelRepository.findChannelById(channelId));
-        System.out.println("______________" + userChannel);
+        UserChannel userChannel = new UserChannel(userRepository.findUserById(userId), channelRepository.findChannelById(channelId));
         return userChannelRepository.save(userChannel);
+    }
+
+    /**
+     * Checks in user is a member of a channel
+     * @param userId user to check
+     * @param channelId channel to check
+     * @return true if user in the channel, false in not
+     */
+    public Boolean checkUserInChannel(Long userId, Long channelId) {
+        UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(userId, channelId);
+        if (userChannel == null) {
+            return false;
+        } else return true;
     }
 }
