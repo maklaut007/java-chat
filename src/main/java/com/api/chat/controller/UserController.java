@@ -1,5 +1,6 @@
 package com.api.chat.controller;
 
+import com.api.chat.model.Channel;
 import com.api.chat.model.request.LoginRequest;
 import com.api.chat.model.User;
 import com.api.chat.service.UserService;

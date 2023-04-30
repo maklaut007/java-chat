@@ -1,5 +1,6 @@
 package com.api.chat.service;
 
+import com.api.chat.model.Channel;
 import com.api.chat.model.User;
 import com.api.chat.model.request.LoginRequest;
 import com.api.chat.model.response.LoginResponse;
@@ -25,6 +26,7 @@ public class UserService {
     private JWTUtils jwtUtils;
     private AuthenticationManager authenticationManager;
     private MyUserDetails myUserDetails;
+
 
     @Autowired
     public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder,

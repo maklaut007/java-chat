@@ -48,10 +48,4 @@ public class ChannelController {
         return channelService.createChannel(channel);
     }
 
-    @GetMapping(path = "/users/{userId}")
-    public List<Channel> findUserChannels(@PathVariable Long userId) {
-        return channelService.findUserChannels(userId);
-    }
-
-
 }

@@ -54,9 +54,7 @@ public class ChannelService {
         return channel;
     }
 
-    public List<Channel> findUserChannels(Long userId){
-        return channelRepository.findChannelsByUserId(userId);
-    }
+    
     // Update channel name
     // Remove channel
 
