@@ -2,6 +2,7 @@ package com.api.chat.service;
 
 import com.api.chat.exception.InformationNotFoundException;
 import com.api.chat.model.Channel;
+import com.api.chat.model.UserChannel;
 import com.api.chat.repository.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ public class ChannelService {
     public void setChannelRepository(ChannelRepository channelRepository) {
         this.channelRepository = channelRepository;
     }
+
     private UserChannelService userChannelService;
+
     @Autowired
     public void setUserChannelService(UserChannelService userChannelService) {
         this.userChannelService = userChannelService;
@@ -25,6 +28,7 @@ public class ChannelService {
 
     /**
      * Returns list of channels that are belong to current user
+     *
      * @return all channels
      */
     public List<Channel> getChannels() {
@@ -33,6 +37,7 @@ public class ChannelService {
 
     /**
      * Returns channel by id if user is in this channel
+     *
      * @param channelId id of channel we are looking for
      * @return channel with id channelId
      */
@@ -50,12 +55,19 @@ public class ChannelService {
      */
     public Channel createChannel(Channel channelObject) {
         Channel channel = channelRepository.save(channelObject);
-        userChannelService.addChannelToUser(UserService.getCurrentLoggedInUser(), channel);
+        userChannelService.addUserToChannel(channel.getId(), UserService.getCurrentLoggedInUser().getId());
         return channel;
     }
 
-    // Add user to channel
-
+    /**
+     * Adds user to new channel. Works only if Current user in this channel
+     * @param channelId channel if where to add user
+     * @param userId id of user to add
+     * @return
+     */
+    public UserChannel addUserToChannel(Long channelId, Long userId) {
+        return userChannelService.addUserToChannel(channelId, userId);
+    }
     // Update channel name
     // Remove channel
 
