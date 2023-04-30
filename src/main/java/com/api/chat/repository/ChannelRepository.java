@@ -14,4 +14,7 @@ public interface ChannelRepository extends JpaRepository<Channel, Long> {
     @Query("SELECT uc.channel FROM UserChannel uc  WHERE uc.user.id = :userId")
     List<Channel> findChannelsByUserId(@Param("userId") Long userId);
 
+    @Query("SELECT uc.channel FROM UserChannel uc  WHERE uc.user.id = :userId AND uc.channel.id = :channelId")
+    Channel findChannelByIdAndUserId(@Param("channelId") Long channelId, @Param("userId") Long userId);
+
 }
