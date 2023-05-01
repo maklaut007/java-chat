@@ -27,4 +27,8 @@ public class MessageController {
     public Message createMessage(@PathVariable Long channelId, @RequestBody Message message) {
         return messageService.createMessage(channelId, message);
     }
+    @PutMapping(path = "/{channelId}/messages/{messageId}")
+    public Message updateMessage(@PathVariable Long channelId, @PathVariable Long messageId, @RequestBody Message message) {
+        return messageService.updateMessage(channelId, messageId, message);
+    }
 }
