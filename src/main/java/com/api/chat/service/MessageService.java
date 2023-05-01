@@ -94,6 +94,13 @@ public class MessageService {
         }
     }
 
+
+    /**
+     * Deleted message created by user
+     * @param messageId id of the message to delete
+     * @return deleted message object
+     * @throws InformationNotFoundException if user can't access the message
+     */
     public Message deleteMessage(Long messageId) {
         Message message = messageRepository.findMessageById(messageId);
 
