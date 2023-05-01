@@ -50,18 +50,16 @@ public class MessageService {
 
     /**
      * Adds new message to channel
-     *
-     * @param channelId     id of channel that contains messages
+     * @param channelId id of channel that contains messages
      * @param messageObject object of message from user
      * @return message object
      */
     public Message createMessage(Long channelId, Message messageObject) {
-
         if (!userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId))
             throw new InformationNotFoundException("Channel with id " + channelId + " not found");
-
         Channel channel = channelService.getChannelById(channelId);
         messageObject.setChannel(channel);
+        messageObject.setUser(UserService.getCurrentLoggedInUser());
         return messageRepository.save(messageObject);
     }
     // Get message from category by Id
