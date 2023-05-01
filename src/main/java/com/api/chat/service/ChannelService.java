@@ -86,7 +86,7 @@ public class ChannelService {
             throw new InformationNotFoundException("Channel with id: " + channelId +" not found");
         }
         channel.setName(channelObject.getName());
-        return channel;
+        return channelRepository.save(channel);
     }
 
     // Remove channel

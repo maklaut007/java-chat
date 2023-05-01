@@ -47,5 +47,9 @@ public class ChannelController {
     public UserChannel addUserToChannel(@PathVariable Long channelId, @PathVariable Long userId) {
         return channelService.addUserToChannel(channelId, userId);
     }
+    @PutMapping(path = "/{channelId}")
+    public Channel updateChannel(@PathVariable Long channelId, @RequestBody Channel channel) {
+        return channelService.updateChannel(channelId, channel);
+    }
 
 }
