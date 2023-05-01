@@ -21,7 +21,6 @@ public class Channel {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Message> messagesList;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "channel", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserChannel> userChannelList;

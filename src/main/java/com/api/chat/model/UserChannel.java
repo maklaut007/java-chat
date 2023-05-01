@@ -13,11 +13,14 @@ public class UserChannel {
     private Long id;
 
     // Connecting Channel
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
     // Connecting User
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
