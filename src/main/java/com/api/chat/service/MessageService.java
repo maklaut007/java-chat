@@ -62,7 +62,4 @@ public class MessageService {
         messageObject.setUser(UserService.getCurrentLoggedInUser());
         return messageRepository.save(messageObject);
     }
-    // Get message from category by Id
-    // Delete message from category by Id
-    // Edit message
 }
