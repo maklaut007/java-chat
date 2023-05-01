@@ -18,19 +18,25 @@ public class MessageController {
         this.messageService = messageService;
     }
 
+    //http://localhost:8888/channels/1/messages/
     @GetMapping(path = "/{channelId}/messages/")
     public List<Message> getMessages(@PathVariable Long channelId) {
         return messageService.getMessages(channelId);
     }
 
+    //http://localhost:8888/channels/1/messages/
     @PostMapping(path = "/{channelId}/messages/")
     public Message createMessage(@PathVariable Long channelId, @RequestBody Message message) {
         return messageService.createMessage(channelId, message);
     }
+
+    //http://localhost:8888/channels/1/messages/1
     @PutMapping(path = "/{channelId}/messages/{messageId}/")
     public Message updateMessage(@PathVariable Long channelId, @PathVariable Long messageId, @RequestBody Message message) {
         return messageService.updateMessage(channelId, messageId, message);
     }
+
+    //http://localhost:8888/channels/1/messages/1
     @DeleteMapping(path = "/{channelId}/messages/{messageId}/")
     public Message deleteMessage(@PathVariable Long channelId, @PathVariable Long messageId) {
         return messageService.deleteMessage(messageId);
