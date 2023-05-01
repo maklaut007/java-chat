@@ -55,12 +55,17 @@ public class MessageService {
      * @return message object
      */
     public Message createMessage(Long channelId, Message messageObject) {
-        if (!userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId))
+        try{
+            if (!userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId))
+                throw new InformationNotFoundException("Channel with id " + channelId + " not found");
+            Channel channel = channelService.getChannelById(channelId);
+            messageObject.setChannel(channel);
+            messageObject.setUser(UserService.getCurrentLoggedInUser());
+            return messageRepository.save(messageObject);
+        }catch (Exception e){
             throw new InformationNotFoundException("Channel with id " + channelId + " not found");
-        Channel channel = channelService.getChannelById(channelId);
-        messageObject.setChannel(channel);
-        messageObject.setUser(UserService.getCurrentLoggedInUser());
-        return messageRepository.save(messageObject);
+        }
+
     }
 
     /**
