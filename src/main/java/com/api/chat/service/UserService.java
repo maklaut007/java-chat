@@ -1,6 +1,5 @@
 package com.api.chat.service;
 
-import com.api.chat.model.Channel;
 import com.api.chat.model.User;
 import com.api.chat.model.request.LoginRequest;
 import com.api.chat.model.response.LoginResponse;
@@ -52,23 +51,34 @@ public class UserService {
         return userDetails.getUser();
     }
 
+    /**
+     * Get all users
+     * @return list of users
+     */
     public List<User> getUsers() {
         return userRepository.findAll();
     }
-
-    public User getUserById(Long user) {
-        return userRepository.findById(user).get();
-    }
-
+    /**
+     * Register new user
+     * @return object of created user
+     */
     public User createUser(User userObject) { // !!! check if already exists
         userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
         return userRepository.save(userObject);
     }
-
+    /**
+     * Find user by email address
+     * @return object of a found user
+     */
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
 
+    /**
+     * Authorize user and provide token for user to access information
+     * @param loginRequest login information
+     * @return generated JWT for user to access private information
+     */
     public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
