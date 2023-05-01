@@ -50,6 +50,7 @@ public class ChannelService {
 
     /**
      * Adds provided channel to the list of channels
+     *
      * @param channelObject body file from request
      * @return created channel
      */
@@ -61,14 +62,33 @@ public class ChannelService {
 
     /**
      * Adds user to new channel. Works only if Current user in this channel
+     *
      * @param channelId channel if where to add user
-     * @param userId id of user to add
-     * @return
+     * @param userId    id of user to add
+     * @return UserChannel object
      */
     public UserChannel addUserToChannel(Long channelId, Long userId) {
         return userChannelService.addUserToChannel(channelId, userId);
     }
-    // Update channel name
+
+    /**
+     * Change channel parameters to provided
+     * @param channelId id of a channel to change
+     * @param channelObject channel object with parameters that we're going to change to
+     * @return updated channel
+     * @throws if channel doesn't exist or user has no access to provided channel
+     */
+    public Channel updateChannel(Long channelId, Channel channelObject) {
+        Channel channel = channelRepository.findChannelById(channelId);
+        // Check if user has access to chanel with provided ID
+        Boolean isUserInChannel = userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId);
+        if(!isUserInChannel) {
+            throw new InformationNotFoundException("Channel with id: " + channelId +" not found");
+        }
+        channel.setName(channelObject.getName());
+        return channel;
+    }
+
     // Remove channel
 
 }
