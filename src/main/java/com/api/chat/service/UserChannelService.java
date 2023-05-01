@@ -65,4 +65,13 @@ public class UserChannelService {
             return false;
         } else return true;
     }
+
+    public UserChannel deleteUserFromChannel(Long userId, Long channelId) {
+        UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(userId, channelId);
+        if(userChannel==null){
+            throw new InformationNotFoundException("User with id " + userId + " is not connected to channel" + channelId);
+        }
+        userChannelRepository.delete(userChannel);
+        return userChannel;
+    }
 }
