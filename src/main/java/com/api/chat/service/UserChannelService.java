@@ -1,10 +1,7 @@
 package com.api.chat.service;
 
 import com.api.chat.exception.InformationExistException;
-import com.api.chat.exception.InformationForbidenException;
 import com.api.chat.exception.InformationNotFoundException;
-import com.api.chat.model.Channel;
-import com.api.chat.model.User;
 import com.api.chat.model.UserChannel;
 import com.api.chat.repository.ChannelRepository;
 import com.api.chat.repository.UserChannelRepository;
@@ -66,10 +63,10 @@ public class UserChannelService {
         } else return true;
     }
 
-    public UserChannel deleteUserFromChannel(Long userId, Long channelId) {
-        UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(userId, channelId);
+    public UserChannel deleteUserFromChannel(Long channelId) {
+        UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(UserService.getCurrentLoggedInUser().getId(), channelId);
         if(userChannel==null){
-            throw new InformationNotFoundException("User with id " + userId + " is not connected to channel" + channelId);
+            throw new InformationNotFoundException("User with id " + UserService.getCurrentLoggedInUser().getId() + " is not connected to channel" + channelId);
         }
         userChannelRepository.delete(userChannel);
         return userChannel;
