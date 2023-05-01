@@ -63,6 +63,12 @@ public class UserChannelService {
         } else return true;
     }
 
+    /**
+     * current user leaves the channel
+     * @param channelId id of the channel where user in
+     * @return UserChannel object
+     * @throws InformationNotFoundException in user is not in this channel
+     */
     public UserChannel deleteUserFromChannel(Long channelId) {
         UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(UserService.getCurrentLoggedInUser().getId(), channelId);
         if(userChannel==null){
