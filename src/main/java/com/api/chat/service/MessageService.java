@@ -19,6 +19,13 @@ public class MessageService {
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
+    // Add access to UserChannel service
+    private UserChannelService userChannelService;
+
+    @Autowired
+    public void setUserChannelService(UserChannelService userChannelService) {
+        this.userChannelService = userChannelService;
+    }
 
     // Add access to channel service
     private ChannelService channelService;
@@ -35,7 +42,8 @@ public class MessageService {
      * @return all messages
      */
     public List<Message> getMessages(Long channelId) {
-        if (channelService.getChannelById(channelId) == null)
+        // if chanel doesn't exist for current user
+        if (!userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId))
             throw new InformationNotFoundException("Channel with id " + channelId + " not found");
         return messageRepository.findMessageByChannelId(channelId);
     }
@@ -47,11 +55,12 @@ public class MessageService {
      * @param messageObject object of message from user
      * @return message object
      */
-
     public Message createMessage(Long channelId, Message messageObject) {
-        Channel channel = channelService.getChannelById(channelId);
-        if (channel == null)
+
+        if (!userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId))
             throw new InformationNotFoundException("Channel with id " + channelId + " not found");
+
+        Channel channel = channelService.getChannelById(channelId);
         messageObject.setChannel(channel);
         return messageRepository.save(messageObject);
     }
