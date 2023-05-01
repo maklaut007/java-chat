@@ -22,8 +22,8 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private JWTUtils jwtUtils;
-    private AuthenticationManager authenticationManager;
+    private final JWTUtils jwtUtils;
+    private final AuthenticationManager authenticationManager;
     private MyUserDetails myUserDetails;
 
 

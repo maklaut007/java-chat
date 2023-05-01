@@ -29,6 +29,7 @@ public class Message {
     public Message() {
 
     }
+
     public Message(Long id, String text, Channel channel) {
         this.id = id;
         this.text = text;

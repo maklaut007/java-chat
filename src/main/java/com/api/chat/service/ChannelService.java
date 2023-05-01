@@ -76,7 +76,7 @@ public class ChannelService {
      * @param channelId id of a channel to change
      * @param channelObject channel object with parameters that we're going to change to
      * @return updated channel
-     * @throws if channel doesn't exist or user has no access to provided channel
+     * @throws InformationNotFoundException if channel doesn't exist or user has no access to provided channel
      */
     public Channel updateChannel(Long channelId, Channel channelObject) {
         Channel channel = channelRepository.findChannelById(channelId);

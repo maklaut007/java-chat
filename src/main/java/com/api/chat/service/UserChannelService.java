@@ -58,9 +58,7 @@ public class UserChannelService {
      */
     public Boolean checkUserInChannel(Long userId, Long channelId) {
         UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(userId, channelId);
-        if (userChannel == null) {
-            return false;
-        } else return true;
+        return userChannel != null;
     }
 
     /**

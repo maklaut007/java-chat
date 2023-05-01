@@ -83,8 +83,8 @@ public class MessageService {
         Message message = messageRepository.findById(messageId).get();
         Boolean isUserInChannel = userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId);
         try {
-            Boolean isCreatedByUser = message.getUser().getId() == UserService.getCurrentLoggedInUser().getId();
-            if (message == null || !isUserInChannel || !isCreatedByUser) {
+            boolean isCreatedByUser = message.getUser().getId().equals(UserService.getCurrentLoggedInUser().getId()) ;
+            if (!isUserInChannel || !isCreatedByUser) {
                 throw new InformationNotFoundException("Message with id " + messageId + " not found");
             }
             message.setText(messageObject.getText());
@@ -102,7 +102,7 @@ public class MessageService {
                 throw new InformationNotFoundException("Message with id " + messageId + " not found");
             }
 
-            Boolean isCreatedByUser = message.getUser().getId() == UserService.getCurrentLoggedInUser().getId();
+            boolean isCreatedByUser = message.getUser().getId().equals(UserService.getCurrentLoggedInUser().getId());
             if (!isCreatedByUser) {
                 throw new InformationNotFoundException("Message with id " + messageId + " not found");
             }
