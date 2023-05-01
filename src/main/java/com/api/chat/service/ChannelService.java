@@ -73,7 +73,8 @@ public class ChannelService {
 
     /**
      * Change channel parameters to provided
-     * @param channelId id of a channel to change
+     *
+     * @param channelId     id of a channel to change
      * @param channelObject channel object with parameters that we're going to change to
      * @return updated channel
      * @throws InformationNotFoundException if channel doesn't exist or user has no access to provided channel
@@ -82,8 +83,8 @@ public class ChannelService {
         Channel channel = channelRepository.findChannelById(channelId);
         // Check if user has access to chanel with provided ID
         Boolean isUserInChannel = userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId);
-        if(!isUserInChannel) {
-            throw new InformationNotFoundException("Channel with id: " + channelId +" not found");
+        if (!isUserInChannel) {
+            throw new InformationNotFoundException("Channel with id: " + channelId + " not found");
         }
         channel.setName(channelObject.getName());
         return channelRepository.save(channel);

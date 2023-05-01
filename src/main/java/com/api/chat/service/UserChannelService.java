@@ -52,7 +52,8 @@ public class UserChannelService {
 
     /**
      * Checks in user is a member of a channel
-     * @param userId user to check
+     *
+     * @param userId    user to check
      * @param channelId channel to check
      * @return true if user in the channel, false in not
      */
@@ -63,13 +64,14 @@ public class UserChannelService {
 
     /**
      * current user leaves the channel
+     *
      * @param channelId id of the channel where user in
      * @return UserChannel object
      * @throws InformationNotFoundException in user is not in this channel
      */
     public UserChannel deleteUserFromChannel(Long channelId) {
         UserChannel userChannel = userChannelRepository.findUserChannelByUserIdAndChannelId(UserService.getCurrentLoggedInUser().getId(), channelId);
-        if(userChannel==null){
+        if (userChannel == null) {
             throw new InformationNotFoundException("User with id " + UserService.getCurrentLoggedInUser().getId() + " is not connected to channel" + channelId);
         }
         userChannelRepository.delete(userChannel);

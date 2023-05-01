@@ -28,7 +28,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public JwtRequestFilter authJwtRequestFilter(){
+    public JwtRequestFilter authJwtRequestFilter() {
         return new JwtRequestFilter();
     }
 
@@ -47,6 +47,7 @@ public class SecurityConfiguration {
         http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();

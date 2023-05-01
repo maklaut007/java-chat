@@ -25,7 +25,8 @@ public class UserChannel {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UserChannel() {}
+    public UserChannel() {
+    }
 
     public UserChannel(User user, Channel channel) {
         this.user = user;

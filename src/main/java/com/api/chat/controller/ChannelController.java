@@ -27,6 +27,7 @@ public class ChannelController {
     public void setUserChannelService(UserChannelService userChannelService) {
         this.userChannelService = userChannelService;
     }
+
     // http://localhost:8888/channels/
     @GetMapping(path = "/")
     public List<Channel> getChannels() {
@@ -50,11 +51,13 @@ public class ChannelController {
     public UserChannel addUserToChannel(@PathVariable Long channelId, @PathVariable Long userId) {
         return channelService.addUserToChannel(channelId, userId);
     }
+
     //http://localhost:8888/channels/1
     @PutMapping(path = "/{channelId}")
     public Channel updateChannel(@PathVariable Long channelId, @RequestBody Channel channel) {
         return channelService.updateChannel(channelId, channel);
     }
+
     // http://localhost:8888/channels/1
     @DeleteMapping(path = "/{channelId}")
     public UserChannel deleteUserFromChannel(@PathVariable Long channelId) {
