@@ -62,4 +62,28 @@ public class MessageService {
         messageObject.setUser(UserService.getCurrentLoggedInUser());
         return messageRepository.save(messageObject);
     }
+
+    /**
+     * Update message that user created
+     * @param channelId channel where message is
+     * @param messageId id of the message
+     * @param messageObject text of updated message
+     * @return updated message
+     * @throws InformationNotFoundException if user can't access the message
+     */
+    public Message updateMessage(Long channelId, Long messageId, Message messageObject) {
+        Message message = messageRepository.findById(messageId).get();
+        Boolean isUserInChannel = userChannelService.checkUserInChannel(UserService.getCurrentLoggedInUser().getId(), channelId);
+        try {
+            Boolean isCreatedByUser = message.getUser().getId() == UserService.getCurrentLoggedInUser().getId();
+            if (message == null || !isUserInChannel || !isCreatedByUser){
+                throw new InformationNotFoundException("Message with id " + messageId + " not found");
+            }
+            message.setText(messageObject.getText());
+            return messageRepository.save(message);
+        }catch (Exception e){
+            throw new InformationNotFoundException("Message with id " + messageId + " not found");
+        }
+    }
+
 }

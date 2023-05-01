@@ -89,7 +89,6 @@ public class ChannelService {
         return channelRepository.save(channel);
     }
 
-    // Remove channel
 
 }
 
