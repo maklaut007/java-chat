@@ -90,5 +90,18 @@ public class MessageService {
             throw new InformationNotFoundException("Message with id " + messageId + " not found");
         }
     }
+    public Message deleteMessage( Long messageId) {
+        Message message = messageRepository.findById(messageId).get();
+        try {
+            Boolean isCreatedByUser = message.getUser().getId() == UserService.getCurrentLoggedInUser().getId();
+            if (message == null || !isCreatedByUser){
+                throw new InformationNotFoundException("Message with id " + messageId + " not found");
+            }
+            messageRepository.deleteById(messageId);
+            return message;
+        }catch (Exception e){
+            throw new InformationNotFoundException("Message with id " + messageId + " not found");
+        }
+    }
 
 }
