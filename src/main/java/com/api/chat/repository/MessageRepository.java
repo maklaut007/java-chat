@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findMessageByChannelId(Long channelId);
+    Message findMessageById(Long messageId);
 }

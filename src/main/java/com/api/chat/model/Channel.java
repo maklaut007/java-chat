@@ -17,7 +17,8 @@ public class Channel {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "channel", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Message> messagesList;
 
@@ -71,7 +72,6 @@ public class Channel {
         return "Channel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", messagesList=" + messagesList +
                 '}';
     }
 }

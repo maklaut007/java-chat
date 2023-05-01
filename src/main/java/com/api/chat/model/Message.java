@@ -21,6 +21,7 @@ public class Message {
     private Channel channel;
 
     // Connecting User
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -72,7 +73,6 @@ public class Message {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", channel=" + channel +
-                ", user=" + user +
                 '}';
     }
 
